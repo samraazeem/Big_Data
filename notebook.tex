@@ -1,0 +1,551 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{big\_data\_spark}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} import dependencies}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{SparkSession}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{context} \PY{k}{import} \PY{n}{SparkContext}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{ArrayType}\PY{p}{,} \PY{n}{StructField}\PY{p}{,} \PY{n}{StructType}\PY{p}{,} \PY{n}{StringType}\PY{p}{,} \PY{n}{IntegerType}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} create spark session}
+        \PY{n}{appName} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PySpark Example \PYZhy{} JSON file to Spark Data Frame}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{master} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{local}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n}{spark} \PY{o}{=} \PY{n}{SparkSession}\PY{o}{.}\PY{n}{builder} \PYZbs{}
+            \PY{o}{.}\PY{n}{appName}\PY{p}{(}\PY{n}{appName}\PY{p}{)} \PYZbs{}
+            \PY{o}{.}\PY{n}{master}\PY{p}{(}\PY{n}{master}\PY{p}{)} \PYZbs{}
+            \PY{o}{.}\PY{n}{getOrCreate}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/azureuser/.local/lib/python3.6/site-packages/pyspark/context.py:238: FutureWarning: Python 3.6 support is deprecated in Spark 3.2.
+  FutureWarning
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} read data source}
+        \PY{n}{json\PYZus{}file\PYZus{}path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./demographic\PYZus{}info.json}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{dataframe} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{n}{json\PYZus{}file\PYZus{}path}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rows Read: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{dataframe}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Rows Read:  55
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}using select query}
+        \PY{n}{df} \PY{o}{=} \PY{n}{dataframe}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{isActive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{company}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{eyeColor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{email}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{phone}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Printing Selected Coulmns: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Printing Selected Coulmns: 
+
++-----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+|             name|age|gender|isActive|  balance|  company|eyeColor|               email|            phone|
++-----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+|      Lowe Larson| 42|  male|    true|\$2,411.24| RENOVIZE|   brown|lowelarson@renovi{\ldots}|+1 (829) 550-2765|
+| Daugherty Wooten| 16|  male|    true|\$2,407.28|ACRODANCE|   green|daughertywooten@a{\ldots}|+1 (802) 479-3544|
+| Patterson Hooper| 28|  male|   false|\$3,350.58| EPLOSION|   green|pattersonhooper@e{\ldots}|+1 (939) 419-2625|
+|      Hood Ortega| 53|  male|    true|\$2,147.34|  GRACKER|    blue|hoodortega@gracke{\ldots}|+1 (880) 575-3417|
+|   Fuller Morales| 58|  male|    true|\$1,851.82|MANGELICA|   brown|fullermorales@man{\ldots}|+1 (958) 597-3314|
+|     Lela Griffin| 55|female|   false|\$1,374.50|   BIFLEX|    blue|lelagriffin@bifle{\ldots}|+1 (808) 409-2628|
+|     Harmon Giles| 34|  male|    true|\$3,294.72|   VETRON|   green|harmongiles@vetro{\ldots}|+1 (957) 417-3607|
+|Tricia Pennington| 18|female|   false|\$1,590.81|CRUSTATIA|   brown|triciapennington@{\ldots}|+1 (912) 537-2355|
+|    Fisher Mathis| 45|  male|    true|\$1,546.40|   ZAPPIX|    blue|fishermathis@zapp{\ldots}|+1 (863) 435-3679|
+|     Karla Barker| 35|female|   false|\$3,972.28|SLOGANAUT|    blue|karlabarker@sloga{\ldots}|+1 (852) 510-2077|
+|      Judy Lowery| 18|female|   false|\$2,015.93|  ORONOKO|   brown|judylowery@oronok{\ldots}|+1 (810) 404-2033|
+|   Tamika Wheeler| 16|female|   false|\$2,856.15| LIQUICOM|   brown|tamikawheeler@liq{\ldots}|+1 (867) 470-2734|
+|  Sharlene Benton| 36|female|    true|\$1,272.43|     WAAB|    blue|sharlenebenton@wa{\ldots}|+1 (825) 578-3842|
+|   Daniel Vasquez| 39|  male|   false|\$2,343.17|  OPTIQUE|   green|danielvasquez@opt{\ldots}|+1 (816) 594-2560|
+|     Lola Clayton| 24|female|   false|\$1,344.88|  ZENTURY|    blue|lolaclayton@zentu{\ldots}|+1 (850) 571-3058|
+|    Rivera Keller| 29|  male|   false|\$2,039.52|ACCUPRINT|   green|riverakeller@accu{\ldots}|+1 (960) 497-3871|
+|     Moran Hester| 29|  male|    true|\$2,800.62|  SYNKGEN|   green|moranhester@synkg{\ldots}|+1 (860) 421-2865|
+| Leslie Middleton| 54|female|   false|\$2,899.17| ENTALITY|    blue|lesliemiddleton@e{\ldots}|+1 (864) 524-2649|
+|     Simpson Vega| 57|  male|    true|\$1,835.50|  DATAGEN|   brown|simpsonvega@datag{\ldots}|+1 (913) 577-3921|
+|    Manuela Burke| 53|female|   false|\$2,736.21|   DUFLEX|   brown|manuelaburke@dufl{\ldots}|+1 (938) 426-3780|
++-----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}using filter}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{isActive} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Filter with isActive: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Filter with isActive: 
+
++----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+|            name|age|gender|isActive|  balance|  company|eyeColor|               email|            phone|
++----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+|     Lowe Larson| 42|  male|    true|\$2,411.24| RENOVIZE|   brown|lowelarson@renovi{\ldots}|+1 (829) 550-2765|
+|Daugherty Wooten| 16|  male|    true|\$2,407.28|ACRODANCE|   green|daughertywooten@a{\ldots}|+1 (802) 479-3544|
+|     Hood Ortega| 53|  male|    true|\$2,147.34|  GRACKER|    blue|hoodortega@gracke{\ldots}|+1 (880) 575-3417|
+|  Fuller Morales| 58|  male|    true|\$1,851.82|MANGELICA|   brown|fullermorales@man{\ldots}|+1 (958) 597-3314|
+|    Harmon Giles| 34|  male|    true|\$3,294.72|   VETRON|   green|harmongiles@vetro{\ldots}|+1 (957) 417-3607|
+|   Fisher Mathis| 45|  male|    true|\$1,546.40|   ZAPPIX|    blue|fishermathis@zapp{\ldots}|+1 (863) 435-3679|
+| Sharlene Benton| 36|female|    true|\$1,272.43|     WAAB|    blue|sharlenebenton@wa{\ldots}|+1 (825) 578-3842|
+|    Moran Hester| 29|  male|    true|\$2,800.62|  SYNKGEN|   green|moranhester@synkg{\ldots}|+1 (860) 421-2865|
+|    Simpson Vega| 57|  male|    true|\$1,835.50|  DATAGEN|   brown|simpsonvega@datag{\ldots}|+1 (913) 577-3921|
+|Concetta Spencer| 43|female|    true|\$2,678.44|MUSANPOLY|   brown|concettaspencer@m{\ldots}|+1 (910) 584-2945|
+|       Lori Rich| 46|female|    true|\$1,675.59| TWIGGERY|   green|loririch@twiggery{\ldots}|+1 (820) 576-3515|
+|     Diaz Carson| 14|  male|    true|\$3,169.39|  PLASMOS|   green|diazcarson@plasmo{\ldots}|+1 (987) 426-2245|
+|   Nettie Dennis| 15|female|    true|\$2,527.23| KATAKANA|   brown|nettiedennis@kata{\ldots}|+1 (900) 412-3106|
+| Rosalinda Wolfe| 13|female|    true|\$1,394.98|  GEOFORM|   green|rosalindawolfe@ge{\ldots}|+1 (831) 576-3214|
+|  Addie Mckinney| 29|female|    true|\$3,501.79|  MARVANE|   brown|addiemckinney@mar{\ldots}|+1 (964) 419-2240|
+| Kirsten Mcbride| 35|female|    true|\$1,579.90|     GYNK|   brown|kirstenmcbride@gy{\ldots}|+1 (922) 559-3513|
+|      Faith Rice| 37|female|    true|\$1,193.99|  JETSILK|   brown|faithrice@jetsilk{\ldots}|+1 (943) 514-2850|
+|      Mabel Byrd| 39|female|    true|\$2,567.42|DARWINIUM|    blue|mabelbyrd@darwini{\ldots}|+1 (948) 521-3321|
+| Eugenia Mcgowan| 35|female|    true|\$1,104.00| GLEAMINK|    blue|eugeniamcgowan@gl{\ldots}|+1 (957) 600-3785|
+|   Celia Walters| 47|female|    true|\$1,233.30|  KONNECT|   brown|celiawalters@konn{\ldots}|+1 (921) 559-2230|
++----------------+---+------+--------+---------+---------+--------+--------------------+-----------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}Adding new column Age\PYZus{}Group}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age\PYZus{}Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{when}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{13}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZlt{}} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{lit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Teenager}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PYZbs{}
+              \PY{o}{.}\PY{n}{when}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZlt{}} \PY{l+m+mi}{40}\PY{p}{)}\PY{p}{,} \PY{n}{lit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adult}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PYZbs{}
+              \PY{o}{.}\PY{n}{when}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{lit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Old}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PYZbs{}
+              \PY{o}{.}\PY{n}{otherwise}\PY{p}{(}\PY{n}{lit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output with new column Age\PYZus{}Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Output with new column Age\_Group
++----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+---------+
+|name            |age|gender|isActive|balance  |company  |eyeColor|email                        |phone            |Age\_Group|
++----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+---------+
+|Lowe Larson     |42 |male  |true    |\$2,411.24|RENOVIZE |brown   |lowelarson@renovize.com      |+1 (829) 550-2765|Old      |
+|Daugherty Wooten|16 |male  |true    |\$2,407.28|ACRODANCE|green   |daughertywooten@acrodance.com|+1 (802) 479-3544|Teenager |
+|Hood Ortega     |53 |male  |true    |\$2,147.34|GRACKER  |blue    |hoodortega@gracker.com       |+1 (880) 575-3417|Old      |
+|Fuller Morales  |58 |male  |true    |\$1,851.82|MANGELICA|brown   |fullermorales@mangelica.com  |+1 (958) 597-3314|Old      |
+|Harmon Giles    |34 |male  |true    |\$3,294.72|VETRON   |green   |harmongiles@vetron.com       |+1 (957) 417-3607|Adult    |
+|Fisher Mathis   |45 |male  |true    |\$1,546.40|ZAPPIX   |blue    |fishermathis@zappix.com      |+1 (863) 435-3679|Old      |
+|Sharlene Benton |36 |female|true    |\$1,272.43|WAAB     |blue    |sharlenebenton@waab.com      |+1 (825) 578-3842|Adult    |
+|Moran Hester    |29 |male  |true    |\$2,800.62|SYNKGEN  |green   |moranhester@synkgen.com      |+1 (860) 421-2865|Adult    |
+|Simpson Vega    |57 |male  |true    |\$1,835.50|DATAGEN  |brown   |simpsonvega@datagen.com      |+1 (913) 577-3921|Old      |
+|Concetta Spencer|43 |female|true    |\$2,678.44|MUSANPOLY|brown   |concettaspencer@musanpoly.com|+1 (910) 584-2945|Old      |
++----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+---------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{.}\PY{n}{createOrReplaceTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EMP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{select name, age, gender, isActive, balance, company, eyeColor, email, phone from }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ (select *, row\PYZus{}number() OVER (PARTITION BY gender ORDER BY balance DESC) as rn }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ FROM EMP) tmp where rn = 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+
+|         name|age|gender|isActive|  balance|company|eyeColor|               email|            phone|
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+
+|   Naomi Kemp| 17|female|    true|\$3,601.90|EXOBLUE|   green|naomikemp@exoblue{\ldots}|+1 (965) 465-2006|
+|Griffin Carey| 47|  male|    true|\$3,330.34| OBONES|   green|griffincarey@obon{\ldots}|+1 (869) 531-3076|
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}maximun }
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{window} \PY{k}{import} \PY{n}{Window}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{col}\PY{p}{,} \PY{n}{row\PYZus{}number}
+        \PY{n}{w} \PY{o}{=} \PY{n}{Window}\PY{o}{.}\PY{n}{partitionBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{desc}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top Male \PYZam{} Female on the basis of Balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{row\PYZus{}number}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)} \PYZbs{}
+          \PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PYZbs{}
+          \PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+|         name|age|gender|isActive|  balance|company|eyeColor|               email|            phone|Age\_Group|
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+|   Naomi Kemp| 17|female|    true|\$3,601.90|EXOBLUE|   green|naomikemp@exoblue{\ldots}|+1 (965) 465-2006| Teenager|
+|Griffin Carey| 47|  male|    true|\$3,330.34| OBONES|   green|griffincarey@obon{\ldots}|+1 (869) 531-3076|      Old|
++-------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}second maximun }
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{window} \PY{k}{import} \PY{n}{Window}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{col}\PY{p}{,} \PY{n}{row\PYZus{}number}
+        \PY{n}{w} \PY{o}{=} \PY{n}{Window}\PY{o}{.}\PY{n}{partitionBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{desc}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top Second Male \PYZam{} Female on the basis of Balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{row\PYZus{}number}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)} \PYZbs{}
+          \PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PYZbs{}
+          \PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Top Second Male \& Female on the basis of Balance
++--------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+|          name|age|gender|isActive|  balance|company|eyeColor|               email|            phone|Age\_Group|
++--------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+|Addie Mckinney| 29|female|    true|\$3,501.79|MARVANE|   brown|addiemckinney@mar{\ldots}|+1 (964) 419-2240|    Adult|
+|  Harmon Giles| 34|  male|    true|\$3,294.72| VETRON|   green|harmongiles@vetro{\ldots}|+1 (957) 417-3607|    Adult|
++--------------+---+------+--------+---------+-------+--------+--------------------+-----------------+---------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}create temp view table}
+         \PY{n}{dataframe}\PY{o}{.}\PY{n}{createTempView}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sample\PYZus{}data\PYZus{}view}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{spark}\PY{o}{.}\PY{n}{sql}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{    SELECT \PYZus{}id, name, age, gender, isActive, balance, company, eyeColor, email, phone}
+         \PY{l+s+s1}{    FROM sample\PYZus{}data\PYZus{}view}
+         \PY{l+s+s1}{    WHERE isActive == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{true}\PY{l+s+s1}{\PYZdq{}}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++------------------------+----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+
+|\_id                     |name            |age|gender|isActive|balance  |company  |eyeColor|email                        |phone            |
++------------------------+----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+
+|6189fc14820ae399fbf0e72e|Lowe Larson     |42 |male  |true    |\$2,411.24|RENOVIZE |brown   |lowelarson@renovize.com      |+1 (829) 550-2765|
+|6189fc149e47c242d283481f|Daugherty Wooten|16 |male  |true    |\$2,407.28|ACRODANCE|green   |daughertywooten@acrodance.com|+1 (802) 479-3544|
+|6189fc1443ea95f1b7cfb74e|Hood Ortega     |53 |male  |true    |\$2,147.34|GRACKER  |blue    |hoodortega@gracker.com       |+1 (880) 575-3417|
+|6189fc14ec90e8b6164151d5|Fuller Morales  |58 |male  |true    |\$1,851.82|MANGELICA|brown   |fullermorales@mangelica.com  |+1 (958) 597-3314|
+|6189fc14cc63ad72d6a2e110|Harmon Giles    |34 |male  |true    |\$3,294.72|VETRON   |green   |harmongiles@vetron.com       |+1 (957) 417-3607|
+|6189fc14df01500f000bf167|Fisher Mathis   |45 |male  |true    |\$1,546.40|ZAPPIX   |blue    |fishermathis@zappix.com      |+1 (863) 435-3679|
+|6189fc1445150b965cd733d0|Sharlene Benton |36 |female|true    |\$1,272.43|WAAB     |blue    |sharlenebenton@waab.com      |+1 (825) 578-3842|
+|6189fc14bbec659ad1e7dce2|Moran Hester    |29 |male  |true    |\$2,800.62|SYNKGEN  |green   |moranhester@synkgen.com      |+1 (860) 421-2865|
+|6189fc141f80e2eafc033e9f|Simpson Vega    |57 |male  |true    |\$1,835.50|DATAGEN  |brown   |simpsonvega@datagen.com      |+1 (913) 577-3921|
+|6189fc141f9e08930a96b272|Concetta Spencer|43 |female|true    |\$2,678.44|MUSANPOLY|brown   |concettaspencer@musanpoly.com|+1 (910) 584-2945|
++------------------------+----------------+---+------+--------+---------+---------+--------+-----------------------------+-----------------+
+only showing top 10 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}convert to rdd}
+         \PY{n}{rdd\PYZus{}object} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{rdd}
+         \PY{n}{rdd\PYZus{}object}\PY{o}{.}\PY{n}{saveAsTextFile}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./rdd\PYZus{}text\PYZus{}new}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}end spark session}
+         \PY{n}{spark}\PY{o}{.}\PY{n}{stop}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
